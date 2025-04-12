@@ -23,6 +23,6 @@ jobs:
         run: npm install -g @usebruno/cli
 
       - name: Run Bruno CLI Tests
-        run: bruno run --env prod --reporter-html ganesh.html
+        run: bru run --env prod --reporter-html ganesh.html
 
 
