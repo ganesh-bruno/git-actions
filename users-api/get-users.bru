@@ -5,13 +5,13 @@ meta {
 }
 
 get {
-  url: {{git-url}}/users/imganeshpatil
+  url: {{git-url}}/users/ganesh
   body: none
   auth: none
 }
 
 tests {
   test("check url of req", function() {
-      expect(req.url).to.include("xv")
+      expect(req.url).to.include("ganesh")
   })
 }
