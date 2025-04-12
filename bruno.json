@@ -1,0 +1,28 @@
+{
+  "version": "1",
+  "name": "bruno-office-hours",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "scripts": {
+    "moduleWhitelist": [
+      "fs",
+      "path"
+    ],
+    "filesystemAccess": {
+      "allow": true
+    }
+  },
+  "size": 0.000518798828125,
+  "filesCount": 4,
+  "presets": {
+    "requestType": "http",
+    "requestUrl": "https://api.github.com/users"
+  },
+  "clientCertificates": {
+    "enabled": true,
+    "certs": []
+  }
+}

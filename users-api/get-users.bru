@@ -1,0 +1,17 @@
+meta {
+  name: get-users
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{git-url}}/users/imganeshpatil
+  body: none
+  auth: none
+}
+
+tests {
+  test("check url of req", function() {
+      expect(req.url).to.include("xv")
+  })
+}
