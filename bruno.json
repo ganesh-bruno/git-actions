@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "bruno-office-hours",
+  "name": "Bruno Office Hours",
   "type": "collection",
   "ignore": [
     "node_modules",
