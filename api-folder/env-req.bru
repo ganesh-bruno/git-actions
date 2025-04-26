@@ -10,13 +10,6 @@ get {
   auth: inherit
 }
 
-body:json {
-  {
-    "name": "{{name}}",
-    "title": "{{title}}"
-  }
-}
-
 assert {
   res.status: eq 200
 }

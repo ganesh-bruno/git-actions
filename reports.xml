@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="api-folder/nested-folder/nested-folder-request" errors="0" failures="0" skipped="0" tests="0" timestamp="2025-04-26T15:03:02.977" hostname="Ganeshs-MacBook-Air.local" time="0.422"/>
+  <testsuite name="api-folder/env-req" errors="0" failures="0" skipped="0" tests="1" timestamp="2025-04-26T15:03:02.985" hostname="Ganeshs-MacBook-Air.local" time="0.054">
+    <testcase name="res.status eq 200" status="pass" classname="https://api.github.com/users/usebruno" time="0.054"/>
+  </testsuite>
+  <testsuite name="echo-bruno" errors="0" failures="0" skipped="0" tests="0" timestamp="2025-04-26T15:03:02.985" hostname="Ganeshs-MacBook-Air.local" time="1.058"/>
+</testsuites>

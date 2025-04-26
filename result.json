@@ -1,0 +1,245 @@
+[
+  {
+    "iterationIndex": 0,
+    "summary": {
+      "totalRequests": 3,
+      "passedRequests": 3,
+      "failedRequests": 0,
+      "skippedRequests": 0,
+      "totalAssertions": 1,
+      "passedAssertions": 1,
+      "failedAssertions": 0,
+      "totalTests": 0,
+      "passedTests": 0,
+      "failedTests": 0
+    },
+    "results": [
+      {
+        "test": {
+          "filename": "api-folder/nested-folder/nested-folder-request.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://api.github.com/users/usebruno",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Sat, 26 Apr 2025 15:03:52 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "cache-control": "public, max-age=60, s-maxage=60",
+            "vary": "Accept,Accept-Encoding, Accept, X-Requested-With",
+            "etag": "W/\"b23d361d533fe3bd660d5f5553d1df6b318ced56f18c158cf6e51f803194afa6\"",
+            "last-modified": "Wed, 02 Apr 2025 12:42:01 GMT",
+            "x-github-media-type": "github.v3",
+            "x-github-api-version-selected": "2022-11-28",
+            "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+            "x-frame-options": "deny",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "0",
+            "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+            "content-security-policy": "default-src 'none'",
+            "server": "github.com",
+            "accept-ranges": "bytes",
+            "x-ratelimit-limit": "60",
+            "x-ratelimit-remaining": "23",
+            "x-ratelimit-reset": "1745681751",
+            "x-ratelimit-resource": "core",
+            "x-ratelimit-used": "37",
+            "content-length": "454",
+            "x-github-request-id": "A4ED:47AE4:520122:6D1D82:680CF5D7"
+          },
+          "data": {
+            "login": "usebruno",
+            "id": 114530840,
+            "node_id": "O_kgDOBtOaGA",
+            "avatar_url": "https://avatars.githubusercontent.com/u/114530840?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/usebruno",
+            "html_url": "https://github.com/usebruno",
+            "followers_url": "https://api.github.com/users/usebruno/followers",
+            "following_url": "https://api.github.com/users/usebruno/following{/other_user}",
+            "gists_url": "https://api.github.com/users/usebruno/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/usebruno/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/usebruno/subscriptions",
+            "organizations_url": "https://api.github.com/users/usebruno/orgs",
+            "repos_url": "https://api.github.com/users/usebruno/repos",
+            "events_url": "https://api.github.com/users/usebruno/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/usebruno/received_events",
+            "type": "Organization",
+            "user_view_type": "public",
+            "site_admin": false,
+            "name": null,
+            "company": null,
+            "blog": "",
+            "location": null,
+            "email": null,
+            "hireable": null,
+            "bio": null,
+            "twitter_username": null,
+            "public_repos": 18,
+            "public_gists": 0,
+            "followers": 343,
+            "following": 0,
+            "created_at": "2022-09-27T20:50:24Z",
+            "updated_at": "2025-04-02T12:42:01Z"
+          },
+          "responseTime": 383
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.403182667,
+        "suitename": "api-folder/nested-folder/nested-folder-request",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "api-folder/env-req.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://api.github.com/users/usebruno",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"name\": \"{{name}}\",\n  \"title\":\"{{title}}\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Sat, 26 Apr 2025 15:03:52 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "cache-control": "public, max-age=60, s-maxage=60",
+            "vary": "Accept,Accept-Encoding, Accept, X-Requested-With",
+            "etag": "W/\"b23d361d533fe3bd660d5f5553d1df6b318ced56f18c158cf6e51f803194afa6\"",
+            "last-modified": "Wed, 02 Apr 2025 12:42:01 GMT",
+            "x-github-media-type": "github.v3",
+            "x-github-api-version-selected": "2022-11-28",
+            "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+            "x-frame-options": "deny",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "0",
+            "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+            "content-security-policy": "default-src 'none'",
+            "server": "github.com",
+            "accept-ranges": "bytes",
+            "x-ratelimit-limit": "60",
+            "x-ratelimit-remaining": "22",
+            "x-ratelimit-reset": "1745681751",
+            "x-ratelimit-resource": "core",
+            "x-ratelimit-used": "38",
+            "content-length": "454",
+            "x-github-request-id": "A4ED:47AE4:52013D:6D1DAE:680CF5D8"
+          },
+          "data": {
+            "login": "usebruno",
+            "id": 114530840,
+            "node_id": "O_kgDOBtOaGA",
+            "avatar_url": "https://avatars.githubusercontent.com/u/114530840?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/usebruno",
+            "html_url": "https://github.com/usebruno",
+            "followers_url": "https://api.github.com/users/usebruno/followers",
+            "following_url": "https://api.github.com/users/usebruno/following{/other_user}",
+            "gists_url": "https://api.github.com/users/usebruno/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/usebruno/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/usebruno/subscriptions",
+            "organizations_url": "https://api.github.com/users/usebruno/orgs",
+            "repos_url": "https://api.github.com/users/usebruno/repos",
+            "events_url": "https://api.github.com/users/usebruno/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/usebruno/received_events",
+            "type": "Organization",
+            "user_view_type": "public",
+            "site_admin": false,
+            "name": null,
+            "company": null,
+            "blog": "",
+            "location": null,
+            "email": null,
+            "hireable": null,
+            "bio": null,
+            "twitter_username": null,
+            "public_repos": 18,
+            "public_gists": 0,
+            "followers": 343,
+            "following": 0,
+            "created_at": "2022-09-27T20:50:24Z",
+            "updated_at": "2025-04-02T12:42:01Z"
+          },
+          "responseTime": 48
+        },
+        "error": null,
+        "assertionResults": [
+          {
+            "uid": "YhVcCOHjR52yT1DhV5ZWf",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          }
+        ],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.056980667,
+        "suitename": "api-folder/env-req",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "echo-bruno.bru"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://echo.usebruno.com",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"value\":\"{{value}}\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "server": "nginx/1.24.0 (Ubuntu)",
+            "date": "Sat, 26 Apr 2025 15:03:53 GMT",
+            "content-type": "application/json",
+            "content-length": "25",
+            "connection": "keep-alive",
+            "host": "echo.usebruno.com:443",
+            "x-real-ip": "49.207.62.47",
+            "x-forwarded-for": "49.207.62.47",
+            "x-forwarded-proto": "https",
+            "accept": "application/json, text/plain, */*",
+            "user-agent": "bruno-runtime/2.1.0",
+            "request-start-time": "1745679832269",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "strict-transport-security": "max-age=63072000; includeSubdomains",
+            "x-frame-options": "DENY",
+            "x-content-type-options": "nosniff"
+          },
+          "data": {
+            "value": "{{value}}"
+          },
+          "responseTime": 1096
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 1.099859375,
+        "suitename": "echo-bruno",
+        "iterationIndex": 0
+      }
+    ]
+  }
+]
