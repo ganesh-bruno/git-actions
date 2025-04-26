@@ -5,16 +5,20 @@ meta {
 }
 
 post {
-  url: https://echo.usebruno.com
+  url: http://echo.usebruno.com
   body: json
   auth: none
 }
 
 body:json {
   {
-    "message": "Hey",
-    "name": "Bruno!"
+    "name": "Bruno", 
+    "commentaire": "<script type=\"text/javascript\" src=some_url></script>"
   }
+}
+
+body:text {
+  "commentaire": "<script type=\"text/javascript\" src=some_url></script>",
 }
 
 body:form-urlencoded {
