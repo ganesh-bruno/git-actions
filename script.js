@@ -12,4 +12,4 @@ async function convertPostmanToBruno(inputFile, outputFile) {
  }
 }
 
-convertPostmanToBruno('./demo_collection.postman_collection.json', 'hi.json');
+convertPostmanToBruno('./demo_collection.postman_collection.json', 'example-bruno.json');
