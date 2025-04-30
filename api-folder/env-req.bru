@@ -13,3 +13,11 @@ get {
 assert {
   res.status: eq 200
 }
+
+script:post-response {
+  if(res.body.login === "usebruno"){
+    const i = 1;
+    bru.setVar("increment",i);
+    console.log(i)
+  }
+}

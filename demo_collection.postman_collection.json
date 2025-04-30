@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "5ea06a5f-3edc-4279-bb59-fed4b0ef8a0d",
+		"name": "demo_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39569522"
+	},
+	"item": [
+		{
+			"name": "3566",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "reqres.in/api/:demo",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						":demo"
+					],
+					"variable": [
+						{
+							"key": "demo",
+							"value": "44"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3579",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.google.com/",
+					"protocol": "https",
+					"host": [
+						"www",
+						"google",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3585",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "google.com/",
+					"host": [
+						"google",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bruno",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reqres_api",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"bru.setVar(\"value\",\"Bruno\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "sample23",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://hl7.org/fhir/us/core/us-core-server.openapi.json",
+					"protocol": "https",
+					"host": [
+						"hl7",
+						"org"
+					],
+					"path": [
+						"fhir",
+						"us",
+						"core",
+						"us-core-server.openapi.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

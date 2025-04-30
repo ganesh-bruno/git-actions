@@ -12,7 +12,33 @@ post {
 
 body:json {
   {
-    "name": "{{name}}",
-    "role":"{{role}}"
+    "names": "Bruno",
+    "message":"Hey Bruno",
+    "id": 10,
+    "isActive": true,
+    "name": {{name}}
   }
+}
+
+assert {
+  res.status: eq 200
+  res.body: isJson
+  res.body.names: isString
+  res.body.id: isNumber
+  res.body.names: length 5
+  res.body.names: startsWith B
+}
+
+script:pre-request {
+  const names = ["john", "smith", "rob"]
+  
+  bru.setVar("name", names)
+  
+  
+}
+
+tests {
+  test("verify res headers include app/json", function() {
+    expect(res.headers["content-type"]).to.include("application/json")
+  })
 }
