@@ -158,14 +158,10 @@
               </n-page-header>
               <n-tabs type="segment" animated>
                 <n-tab-pane name="summary" tab="Summary">
-                  <n-flex justify="center" vertical>
-                    <x-summary v-for="(result, index) in res" :res="result" :key="index"></x-summary>
-                  </n-flex>
+                  <x-summary :res="res"></x-summary>
                 </n-tab-pane>
                 <n-tab-pane name="Requests" tab="Requests">
-                  <n-flex justify="center" vertical>
-                    <x-requests v-for="(result, index) in res" :res="result" :key="index"></x-requests>
-                  </n-flex>
+                  <x-requests :res="res"></x-requests>
                 </n-tab-pane>
               </n-tabs>
             </n-flex>
@@ -174,69 +170,59 @@
       </n-config-provider>
     </div>
     <script type="text/x-template" id="summary-component">
-      <n-flex vertical style="margin-bottom: 50px;">
-        <n-card>
-          <template #header>
-            <span style="font-size: 24px;">{{ iterationTitle }}</span>
-          </template>
+      <n-flex vertical>
+        <n-flex justify="center">
+          <n-alert type="success">
+            <n-statistic
+              label="Total Controls"
+              :value="summaryTotalControls"
+            >
+            </n-statistic>
+          </n-alert>
+          <n-alert :type="summaryFailedControls ? 'error' : 'success'">
+            <n-statistic
+              label="Total Failed Controls"
+              :value="summaryFailedControls"
+            >
+            </n-statistic>
+          </n-alert>
+          <n-alert :type="summaryErrors ? 'error' : 'success'">
+            <n-statistic label="Total errors" :value="summaryErrors">
+            </n-statistic>
+          </n-alert>
+        </n-flex>
+        <n-card title="TIMINGS AND DATA">
           <n-flex justify="center">
-            <n-flex justify="center">
-              <n-alert type="success">
-                <n-statistic
-                  label="Total requests"
-                  :value="summaryTotalRequests"
-                >
-                </n-statistic>
-              </n-alert>
-              <n-alert :type="summaryErrors ? 'error' : 'success'">
-                <n-statistic label="Total errors" :value="summaryErrors">
-                </n-statistic>
-              </n-alert>
-              <n-alert type="success">
-                <n-statistic
-                  label="Total Controls"
-                  :value="summaryTotalControls"
-                >
-                </n-statistic>
-              </n-alert>
-              <n-alert :type="summaryFailedControls ? 'error' : 'success'">
-                <n-statistic
-                  label="Total Failed Controls"
-                  :value="summaryFailedControls"
-                >
-                </n-statistic>
-              </n-alert>
-              <n-statistic
+            <n-statistic
               label="Total run duration"
               :value="Math.round(totalRunDuration*1000)/1000"
             >
               <template #suffix>s</template>
             </n-statistic>
-            </n-flex>
+            <n-statistic
+              label="Total requests"
+              :value="summaryTotalRequests"
+            >
+            </n-statistic>
           </n-flex>
         </n-card>
         <n-data-table :columns="summaryColumns" :data="summaryData" />
       </n-flex>
     </script>
     <script type="text/x-template" id="requests-component">
-      <n-card>
-        <template #header>
-          <span style="font-size: 24px;">{{ iterationTitle }}</span>
-        </template>
-        <n-flex vertical style="margin-bottom: 50px">
-          <n-switch
-            v-model:value="onlyFailed"
-            :rail-style="railStyle"
-          >
-            <template #checked> Only Failed </template>
-            <template #unchecked> Only Passed </template>
-          </n-switch>
+      <n-flex vertical>
+        <n-switch
+          v-model:value="onlyFailed"
+          :rail-style="railStyle"
+        >
+          <template #checked> Only Failed </template>
+          <template #unchecked> Only Failed </template>
+        </n-switch>
 
-          <n-collapse>
-            <x-results-group v-for="(results, group) in groupedResults" :results="results" :group="group" :key="group + '-' + results.length"></x-results-group>
-          </n-collapse>
-        </n-flex>
-      </n-card>
+        <n-collapse>
+          <x-results-group v-for="(results, group) in groupedResults" :results="results" :group="group" :key="group + '-' + results.length"></x-results-group>
+        </n-collapse>
+      </n-flex>
     </script>
     <script type="text/x-template" id="results-group-component">
       <n-collapse-item
@@ -373,251 +359,69 @@
 
       const App = {
         setup() {
-          const res = [
-  {
-    "iterationIndex": 0,
-    "summary": {
-      "totalRequests": 3,
-      "passedRequests": 3,
-      "failedRequests": 0,
-      "skippedRequests": 0,
-      "totalAssertions": 1,
-      "passedAssertions": 1,
-      "failedAssertions": 0,
-      "totalTests": 0,
-      "passedTests": 0,
-      "failedTests": 0
-    },
-    "results": [
-      {
-        "test": {
-          "filename": "api-folder/nested-folder/nested-folder-request.bru"
-        },
-        "request": {
-          "method": "GET",
-          "url": "https://api.github.com/users/usebruno",
-          "headers": {}
-        },
-        "response": {
-          "status": 200,
-          "statusText": "OK",
-          "headers": {
-            "date": "Sat, 26 Apr 2025 15:05:22 GMT",
-            "content-type": "application/json; charset=utf-8",
-            "cache-control": "public, max-age=60, s-maxage=60",
-            "vary": "Accept,Accept-Encoding, Accept, X-Requested-With",
-            "etag": "W/\"b23d361d533fe3bd660d5f5553d1df6b318ced56f18c158cf6e51f803194afa6\"",
-            "last-modified": "Wed, 02 Apr 2025 12:42:01 GMT",
-            "x-github-media-type": "github.v3",
-            "x-github-api-version-selected": "2022-11-28",
-            "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
-            "access-control-allow-origin": "*",
-            "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
-            "x-frame-options": "deny",
-            "x-content-type-options": "nosniff",
-            "x-xss-protection": "0",
-            "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
-            "content-security-policy": "default-src 'none'",
-            "server": "github.com",
-            "accept-ranges": "bytes",
-            "x-ratelimit-limit": "60",
-            "x-ratelimit-remaining": "21",
-            "x-ratelimit-reset": "1745681751",
-            "x-ratelimit-resource": "core",
-            "x-ratelimit-used": "39",
-            "content-length": "454",
-            "x-github-request-id": "A1E7:2E4B5F:4E2F14:69419F:680CF632"
-          },
-          "data": {
-            "login": "usebruno",
-            "id": 114530840,
-            "node_id": "O_kgDOBtOaGA",
-            "avatar_url": "https://avatars.githubusercontent.com/u/114530840?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/usebruno",
-            "html_url": "https://github.com/usebruno",
-            "followers_url": "https://api.github.com/users/usebruno/followers",
-            "following_url": "https://api.github.com/users/usebruno/following{/other_user}",
-            "gists_url": "https://api.github.com/users/usebruno/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/usebruno/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/usebruno/subscriptions",
-            "organizations_url": "https://api.github.com/users/usebruno/orgs",
-            "repos_url": "https://api.github.com/users/usebruno/repos",
-            "events_url": "https://api.github.com/users/usebruno/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/usebruno/received_events",
-            "type": "Organization",
-            "user_view_type": "public",
-            "site_admin": false,
-            "name": null,
-            "company": null,
-            "blog": "",
-            "location": null,
-            "email": null,
-            "hireable": null,
-            "bio": null,
-            "twitter_username": null,
-            "public_repos": 18,
-            "public_gists": 0,
-            "followers": 343,
-            "following": 0,
-            "created_at": "2022-09-27T20:50:24Z",
-            "updated_at": "2025-04-02T12:42:01Z"
-          },
-          "responseTime": 415
-        },
-        "error": null,
-        "assertionResults": [],
-        "testResults": [],
-        "shouldStopRunnerExecution": false,
-        "runtime": 0.432042416,
-        "suitename": "api-folder/nested-folder/nested-folder-request",
-        "iterationIndex": 0
+          const res = {
+  "summary": {
+    "totalRequests": 1,
+    "passedRequests": 1,
+    "failedRequests": 0,
+    "skippedRequests": 0,
+    "errorRequests": 0,
+    "totalAssertions": 0,
+    "passedAssertions": 0,
+    "failedAssertions": 0,
+    "totalTests": 1,
+    "passedTests": 1,
+    "failedTests": 0
+  },
+  "results": [
+    {
+      "test": {
+        "filename": "echo-bruno.bru"
       },
-      {
-        "test": {
-          "filename": "api-folder/env-req.bru"
-        },
-        "request": {
-          "method": "GET",
-          "url": "https://api.github.com/users/usebruno",
-          "headers": {
-            "content-type": "application/json"
-          },
-          "data": "{\n  \"name\": \"{{name}}\",\n  \"title\":\"{{title}}\"\n}"
-        },
-        "response": {
-          "status": 200,
-          "statusText": "OK",
-          "headers": {
-            "date": "Sat, 26 Apr 2025 15:05:22 GMT",
-            "content-type": "application/json; charset=utf-8",
-            "cache-control": "public, max-age=60, s-maxage=60",
-            "vary": "Accept,Accept-Encoding, Accept, X-Requested-With",
-            "etag": "W/\"b23d361d533fe3bd660d5f5553d1df6b318ced56f18c158cf6e51f803194afa6\"",
-            "last-modified": "Wed, 02 Apr 2025 12:42:01 GMT",
-            "x-github-media-type": "github.v3",
-            "x-github-api-version-selected": "2022-11-28",
-            "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
-            "access-control-allow-origin": "*",
-            "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
-            "x-frame-options": "deny",
-            "x-content-type-options": "nosniff",
-            "x-xss-protection": "0",
-            "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
-            "content-security-policy": "default-src 'none'",
-            "server": "github.com",
-            "accept-ranges": "bytes",
-            "x-ratelimit-limit": "60",
-            "x-ratelimit-remaining": "20",
-            "x-ratelimit-reset": "1745681751",
-            "x-ratelimit-resource": "core",
-            "x-ratelimit-used": "40",
-            "content-length": "454",
-            "x-github-request-id": "A1E7:2E4B5F:4E2F2A:6941B8:680CF632"
-          },
-          "data": {
-            "login": "usebruno",
-            "id": 114530840,
-            "node_id": "O_kgDOBtOaGA",
-            "avatar_url": "https://avatars.githubusercontent.com/u/114530840?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/usebruno",
-            "html_url": "https://github.com/usebruno",
-            "followers_url": "https://api.github.com/users/usebruno/followers",
-            "following_url": "https://api.github.com/users/usebruno/following{/other_user}",
-            "gists_url": "https://api.github.com/users/usebruno/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/usebruno/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/usebruno/subscriptions",
-            "organizations_url": "https://api.github.com/users/usebruno/orgs",
-            "repos_url": "https://api.github.com/users/usebruno/repos",
-            "events_url": "https://api.github.com/users/usebruno/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/usebruno/received_events",
-            "type": "Organization",
-            "user_view_type": "public",
-            "site_admin": false,
-            "name": null,
-            "company": null,
-            "blog": "",
-            "location": null,
-            "email": null,
-            "hireable": null,
-            "bio": null,
-            "twitter_username": null,
-            "public_repos": 18,
-            "public_gists": 0,
-            "followers": 343,
-            "following": 0,
-            "created_at": "2022-09-27T20:50:24Z",
-            "updated_at": "2025-04-02T12:42:01Z"
-          },
-          "responseTime": 45
-        },
-        "error": null,
-        "assertionResults": [
-          {
-            "uid": "Ho8zYgNTkLLKp66910KhZ",
-            "lhsExpr": "res.status",
-            "rhsExpr": "eq 200",
-            "rhsOperand": "200",
-            "operator": "eq",
-            "status": "pass"
-          }
-        ],
-        "testResults": [],
-        "shouldStopRunnerExecution": false,
-        "runtime": 0.055009959,
-        "suitename": "api-folder/env-req",
-        "iterationIndex": 0
+      "request": {
+        "method": "POST",
+        "url": "https://echo.usebruno.com",
+        "headers": {},
+        "data": "{\n  \"names\": \"Bruno\",\n  \"message\":\"Hey Bruno\",\n  \"id\": 10,\n  \"isActive\": true,\n  \"name\": {{name}}\n}"
       },
-      {
-        "test": {
-          "filename": "echo-bruno.bru"
+      "response": {
+        "status": 200,
+        "statusText": "OK",
+        "headers": {
+          "date": "Thu, 29 May 2025 15:55:56 GMT",
+          "content-length": "121",
+          "connection": "keep-alive",
+          "host": "echo.usebruno.com:443",
+          "x-real-ip": "49.207.62.47",
+          "x-forwarded-for": "49.207.62.47",
+          "x-forwarded-proto": "https",
+          "accept": "application/json, text/plain, */*",
+          "user-agent": "bruno-runtime/1.16.0",
+          "request-start-time": "1748534155206",
+          "accept-encoding": "gzip, compress, deflate, br",
+          "strict-transport-security": "max-age=63072000; includeSubdomains",
+          "x-frame-options": "DENY",
+          "x-content-type-options": "nosniff"
         },
-        "request": {
-          "method": "POST",
-          "url": "https://echo.usebruno.com",
-          "headers": {
-            "content-type": "application/json"
-          },
-          "data": "{\n  \"value\":\"{{value}}\"\n}"
-        },
-        "response": {
-          "status": 200,
-          "statusText": "OK",
-          "headers": {
-            "server": "nginx/1.24.0 (Ubuntu)",
-            "date": "Sat, 26 Apr 2025 15:05:23 GMT",
-            "content-type": "application/json",
-            "content-length": "25",
-            "connection": "keep-alive",
-            "host": "echo.usebruno.com:443",
-            "x-real-ip": "49.207.62.47",
-            "x-forwarded-for": "49.207.62.47",
-            "x-forwarded-proto": "https",
-            "accept": "application/json, text/plain, */*",
-            "user-agent": "bruno-runtime/2.1.0",
-            "request-start-time": "1745679922897",
-            "accept-encoding": "gzip, compress, deflate, br",
-            "strict-transport-security": "max-age=63072000; includeSubdomains",
-            "x-frame-options": "DENY",
-            "x-content-type-options": "nosniff"
-          },
-          "data": {
-            "value": "{{value}}"
-          },
-          "responseTime": 866
-        },
-        "error": null,
-        "assertionResults": [],
-        "testResults": [],
-        "shouldStopRunnerExecution": false,
-        "runtime": 0.868823166,
-        "suitename": "echo-bruno",
-        "iterationIndex": 0
-      }
-    ]
-  }
-];
+        "data": "{\n  \"names\": \"Bruno\",\n  \"message\":\"Hey Bruno\",\n  \"id\": 10,\n  \"isActive\": true,\n  \"name\": {{name}}\n}",
+        "responseTime": 914
+      },
+      "error": null,
+      "status": "pass",
+      "assertionResults": [],
+      "testResults": [
+        {
+          "description": "verify res headers include app/json",
+          "status": "pass",
+          "uid": "m4BkS5T_cwzPhSAsK14v8"
+        }
+      ],
+      "shouldStopRunnerExecution": false,
+      "runtime": 0.950673875,
+      "suitename": "/Users/ganeshpatil/Desktop/bruno/bruno-collection/echo-bruno"
+    }
+  ]
+};
 
           const darkMode = ref(false);
           const theme = computed(() => {
@@ -641,7 +445,7 @@
       const app = Vue.createApp(App);
 
       app.component('x-summary', {
-        template: '#summary-component',
+        template: `#summary-component`,
         props: ['res'],
         setup(props) {
           const summaryColumns = [
@@ -660,10 +464,6 @@
             {
               title: 'FAILED',
               key: 'failed'
-            },
-            {
-              title: 'ERROR',
-              key: 'error'
             }
           ];
           const summaryData = computed(() => [
@@ -671,22 +471,19 @@
               title: 'Requests',
               total: props.res.summary.totalRequests,
               passed: props.res.summary.passedRequests,
-              failed: props.res.summary.failedRequests,
-              error: props?.res?.summary?.errorRequests
+              failed: props.res.summary.failedRequests
             },
             {
               title: 'Assertions',
               total: props.res.summary.totalAssertions,
               passed: props.res.summary.passedAssertions,
-              failed: props.res.summary.failedAssertions,
-              error: '-'
+              failed: props.res.summary.failedAssertions
             },
             {
               title: 'Tests',
               total: props.res.summary.totalTests,
               passed: props.res.summary.passedTests,
-              failed: props.res.summary.failedTests,
-              error: '-'
+              failed: props.res.summary.failedTests
             }
           ]);
           const summaryTotalRequests = computed(() => {
@@ -696,11 +493,10 @@
             return props.res.summary.totalTests + props.res.summary.totalAssertions;
           });
           const summaryFailedControls = computed(
-            () => props?.res?.summary?.failedTests + props?.res?.summary?.failedAssertions
+            () => props.res.summary.failedRequests + props.res.summary.failedTests + props.res.summary.failedAssertions
           );
-          const summaryErrors = computed(() => props?.res?.results?.filter((r) => r.error || r.status === 'error').length) || 0;
+          const summaryErrors = computed(() => props.res.results.filter((r) => r.error).length);
           const totalRunDuration = computed(() => props.res?.results?.reduce((total, test) => test.runtime + total, 0));
-          const iterationIndex = Number(props.res.iterationIndex) + 1;
           return {
             summaryColumns,
             summaryData,
@@ -708,33 +504,32 @@
             summaryTotalRequests,
             summaryFailedControls,
             summaryErrors,
-            totalRunDuration,
-            iterationTitle: 'Iteration ' + iterationIndex
+            totalRunDuration
           };
         }
       });
 
       app.component('x-requests', {
-        template: '#requests-component',
+        template: `#requests-component`,
         props: ['res'],
         setup(props) {
           const onlyFailed = ref(false);
           const filteredResults = computed(() => {
             if (onlyFailed.value) {
-              return props?.res?.results?.filter(
+              return props.res.results.filter(
                 (r) =>
-                  r.status === 'error' ||
-                  !!r?.testResults?.find((t) => t.status !== 'pass') ||
-                  !!r?.assertionResults?.find((t) => t.status !== 'pass')
+                  !!r.error ||
+                  !!r.testResults.find((t) => t.status !== 'pass') ||
+                  !!r.assertionResults.find((t) => t.status !== 'pass')
               );
             }
             return props.res.results;
           });
           const groupedResults = computed(() => {
             return filteredResults.value.reduce((groups, curr) => {
-              const path = curr?.suitename?.split('/');
+              const path = curr.suitename.split('/');
               const test = path.pop();
-              const name = (path.length || 0) ? path.join('/') : '(root)';
+              const name = path.length ? path.join('/') : '(root)';
               if (!groups[name]) {
                 groups[name] = [];
               }
@@ -742,7 +537,6 @@
               return groups;
             }, {});
           });
-          const iterationIndex = Number(props.res.iterationIndex) + 1;
           return {
             onlyFailed,
             groupedResults,
@@ -752,31 +546,31 @@
                 style.background = '#d03050';
               }
               return style;
-            },
-            iterationTitle: 'Iteration ' + iterationIndex
+            }
           };
         }
       });
 
       app.component('x-results-group', {
-        template: '#results-group-component',
+        template: `#results-group-component`,
         props: ['group', 'results'],
         setup(props) {
           const totalPassed = computed(() => {
             return props.results.reduce((total, curr) => {
               return (
                 total +
-                (curr?.testResults?.filter((t) => t.status === 'pass').length || 0) +
-                (curr?.assertionResults?.filter((t) => t.status === 'pass').length || 0)
+                curr.testResults.filter((t) => t.status === 'pass').length +
+                curr.assertionResults.filter((t) => t.status === 'pass').length
               );
             }, 0);
           });
           const total = computed(() => {
             return props.results.reduce((total, curr) => {
-              return total + (curr?.testResults?.length || 0) + (curr?.assertionResults?.length || 0);
+              return total + curr.testResults.length + curr.assertionResults.length;
             }, 0);
           });
-          const hasError = computed(() => props.results.some((r) => !!r.error || r?.status === 'error'));
+
+          const hasError = computed(() => props.results.some((r) => !!r.error));
           const hasFailure = computed(() => totalPassed.value !== total.value);
           return {
             totalPassed,
@@ -790,7 +584,7 @@
       });
 
       app.component('x-result', {
-        template: '#result-component',
+        template: `#result-component`,
         props: ['group', 'result'],
         setup(props) {
           const headerColumns = [
@@ -859,26 +653,26 @@
             }));
           }
           const headerDataRequest = computed(() => {
-            return mapHeaderToTableData(props?.result?.request?.headers);
+            return mapHeaderToTableData(props.result.request.headers);
           });
           const headerDataResponse = computed(() => {
-            return mapHeaderToTableData(props?.result?.response?.headers);
+            return mapHeaderToTableData(props.result.response.headers);
           });
           const totalPassed = computed(() => {
             return (
-              (props?.result?.testResults?.filter((t) => t.status === 'pass').length || 0) +
-              (props?.result?.assertionResults?.filter((t) => t.status === 'pass').length || 0)
+              props.result.testResults.filter((t) => t.status === 'pass').length +
+              props.result.assertionResults.filter((t) => t.status === 'pass').length
             );
           });
           const total = computed(() => {
-            return (props?.result?.testResults?.length || 0) + (props?.result?.assertionResults?.length || 0);
+            return props.result.testResults.length + props.result.assertionResults.length;
           });
 
-          const hasError = computed(() => !!props?.result?.error || props?.result?.status === 'error');
+          const hasError = computed(() => !!props.result.error);
           const hasFailure = computed(() => total.value !== totalPassed.value);
-          const suitename = computed(() => props?.result?.suitename?.replace(props.group + '/', ''));
-          const testDuration = computed(() => Math.round(props?.result?.runtime * 1000) + ' ms');
-          const name = computed(() => props?.result?.suitename + props?.result?.runtime);
+          const suitename = computed(() => props.result.suitename.replace(props.group + '/', ''));
+          const testDuration = computed(() => Math.round(props.result.runtime * 1000) + ' ms');
+          const name = computed(() => props.result.suitename + props.result.runtime);
           return {
             headerColumns,
             headerDataRequest,
@@ -894,12 +688,10 @@
             result: props.result,
             suitename,
             testDuration,
-            name,
-            iterationIndex: props?.result?.iterationIndex
+            name
           };
         }
       });
-
       app.use(naive);
       app.mount('#app');
     </script>

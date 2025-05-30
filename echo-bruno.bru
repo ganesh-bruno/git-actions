@@ -7,7 +7,7 @@ meta {
 post {
   url: https://echo.usebruno.com
   body: json
-  auth: inherit
+  auth: none
 }
 
 body:json {
@@ -20,25 +20,7 @@ body:json {
   }
 }
 
-assert {
-  res.status: eq 200
-  res.body: isJson
-  res.body.names: isString
-  res.body.id: isNumber
-  res.body.names: length 5
-  res.body.names: startsWith B
-}
-
 script:pre-request {
-  const names = ["john", "smith", "rob"]
-  
-  bru.setVar("name", names)
-  
-  
-}
-
-tests {
-  test("verify res headers include app/json", function() {
-    expect(res.headers["content-type"]).to.include("application/json")
-  })
+  const response = await bru.runRequest("/req-a.bru");
+  console.log(response.data.login)
 }
